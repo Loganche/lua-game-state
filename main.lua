@@ -1,4 +1,5 @@
-require("stateMachine.stateMachine")
+local StateMachine = require("stateMachine.stateMachineInterface")
+local StateMachineConf = require("stateMachine.stateMachineConf")
 local Background = require("background.background")
 
 function love.load()
@@ -7,25 +8,26 @@ function love.load()
     Background:load()
 
     local mainMenu = require("stateMachine.states.mainMenu")
-    GameStateManager:setState(mainMenu)
+    StateMachine.confState = StateMachineConf
+    StateMachine:setState(mainMenu)
 end
 
 function love.update(dt)
     Background:update(dt)
-    GameStateManager:update(dt)
+    StateMachine:update(dt)
 end
 
 function love.draw()
     Background:draw()
-    GameStateManager:draw()
+    StateMachine:draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
     Background:keypressed(key, scancode, isrepeat)
-    GameStateManager:keypressed(key, scancode, isrepeat)
+    StateMachine:keypressed(key, scancode, isrepeat)
 end
 
 function love.quit()
-    GameStateManager:quit()
+    StateMachine:quit()
     return false
 end

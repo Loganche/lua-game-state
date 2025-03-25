@@ -1,5 +1,5 @@
 --! file: shape.lua
-local Object = require "classic"
+local Object = require("game.lib.ext.classic")
 
 local Shape = Object:extend()
 

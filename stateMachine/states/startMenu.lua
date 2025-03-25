@@ -1,3 +1,5 @@
+local StateMachine = require("stateMachine.stateMachineInterface")
+
 local StartMenu = {}
 
 local items = { "Play", "Back" }
@@ -24,7 +26,7 @@ end
 
 function StartMenu:keypressed(key, scancode, isrepeat)
     if key == "return" then
-        FindNextState(self)
+        StateMachine:nextState()
     end
 
     if key == "up" then

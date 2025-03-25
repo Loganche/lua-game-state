@@ -1,3 +1,5 @@
+local StateMachine = require("stateMachine.stateMachineInterface")
+
 local Game = {}
 
 local Player = require("game.src.player")
@@ -24,7 +26,7 @@ function Game:update(dt)
         Result['enemy'] = self.enemy.health
         for i, _ in pairs(self.playerBullets) do self.playerBullets[i] = nil end
         for i, _ in pairs(self.snakeBullets) do self.snakeBullets[i] = nil end
-        FindNextState(self)
+        StateMachine:nextState()
     end
 
     for i, v in ipairs(self.playerBullets) do
@@ -61,7 +63,7 @@ end
 
 function Game:keypressed(key, scancode, isrepeat)
     if key == "escape" then
-        GameStateManager:revertState()
+        StateMachine:revertState()
     end
 
 

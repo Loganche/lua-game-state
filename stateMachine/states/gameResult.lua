@@ -1,3 +1,5 @@
+local StateMachine = require("stateMachine.stateMachineInterface")
+
 local GameResult = {
     result = {},
 }
@@ -31,9 +33,9 @@ end
 
 function GameResult:keypressed(key, scancode, isrepeat)
     if key == "escape" then
-        GameStateManager:revertState()
+        StateMachine:revertState()
     elseif key == "return" then
-        FindNextState(self)
+        StateMachine:nextState()
     end
 end
 

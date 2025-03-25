@@ -1,3 +1,5 @@
+local StateMachine = require("stateMachine.stateMachineInterface")
+
 local Quit = {}
 
 

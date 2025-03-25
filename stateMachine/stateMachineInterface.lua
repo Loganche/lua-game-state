@@ -1,6 +1,7 @@
-local GameStateManager = {
+local StateMachine = {
     currentState = nil,
-    previousState = nil
+    previousState = nil,
+    confState = nil
 }
 
 local function assertState(state)
@@ -13,15 +14,15 @@ local function assertFunction(state, funcName)
     end
 end
 
-function GameStateManager:getPreviousState()
+function StateMachine:getPreviousState()
     return self.previousState
 end
 
-function GameStateManager:getState()
+function StateMachine:getState()
     return self.currentState
 end
 
-function GameStateManager:setState(newState)
+function StateMachine:setState(newState)
     assertState(newState)
 
     if self.currentState == newState then return end
@@ -37,7 +38,7 @@ function GameStateManager:setState(newState)
     end
 end
 
-function GameStateManager:reloadState()
+function StateMachine:reloadState()
     if self.currentState then
         assertFunction(self.currentState, "enter")
         if self.currentState.enter then
@@ -46,13 +47,28 @@ function GameStateManager:reloadState()
     end
 end
 
-function GameStateManager:revertState()
+function StateMachine:revertState()
     if self.previousState then
         self:setState(self.previousState)
     end
 end
 
-function GameStateManager:mousemoved(x, y, ...)
+function StateMachine:nextState()
+    if self.confState then
+        local state, pos = self.currentState.__tostring()
+        local nextState = self.confState[state][pos]
+
+        if nextState == "dummy" then
+                StateMachine:reloadState()
+        -- elseif nextState == "revert" then
+        --     GameStateManager:setState(mainMenu)
+        else
+            self:setState(nextState)
+        end
+    end
+end
+
+function StateMachine:mousemoved(x, y, ...)
     assert(type(x) == "number", "x must be a number")
     assert(type(y) == "number", "y must be a number")
     if self.currentState then
@@ -63,7 +79,7 @@ function GameStateManager:mousemoved(x, y, ...)
     end
 end
 
-function GameStateManager:wheelmoved(x, y)
+function StateMachine:wheelmoved(x, y)
     assert(type(x) == "number", "x must be a number")
     assert(type(y) == "number", "y must be a number")
     if self.currentState then
@@ -74,7 +90,7 @@ function GameStateManager:wheelmoved(x, y)
     end
 end
 
-function GameStateManager:mousepressed(x, y, button)
+function StateMachine:mousepressed(x, y, button)
     assert(type(x) == "number", "x must be a number")
     assert(type(y) == "number", "y must be a number")
     assert(type(button) == "number", "button must be a number")
@@ -86,7 +102,7 @@ function GameStateManager:mousepressed(x, y, button)
     end
 end
 
-function GameStateManager:mousereleased(x, y, button)
+function StateMachine:mousereleased(x, y, button)
     assert(type(x) == "number", "x must be a number")
     assert(type(y) == "number", "y must be a number")
     assert(type(button) == "number", "button must be a number")
@@ -98,7 +114,7 @@ function GameStateManager:mousereleased(x, y, button)
     end
 end
 
-function GameStateManager:keypressed(key, scancode, isrepeat)
+function StateMachine:keypressed(key, scancode, isrepeat)
     assert(type(key) == "string", "key must be a string")
     assert(type(scancode) == "string", "scancode must be a string")
     assert(type(isrepeat) == "boolean", "isrepeat must be a boolean")
@@ -110,7 +126,7 @@ function GameStateManager:keypressed(key, scancode, isrepeat)
     end
 end
 
-function GameStateManager:keyreleased(key, scancode)
+function StateMachine:keyreleased(key, scancode)
     assert(type(key) == "string", "key must be a string")
     assert(type(scancode) == "string", "scancode must be a string")
     if self.currentState then
@@ -121,7 +137,7 @@ function GameStateManager:keyreleased(key, scancode)
     end
 end
 
-function GameStateManager:textinput(text)
+function StateMachine:textinput(text)
     assert(type(text) == "string", "text must be a string")
     if self.currentState then
         assertFunction(self.currentState, "textinput")
@@ -131,7 +147,7 @@ function GameStateManager:textinput(text)
     end
 end
 
-function GameStateManager:update(dt)
+function StateMachine:update(dt)
     assert(type(dt) == "number", "dt must be a number")
     if self.currentState then
         assertFunction(self.currentState, "update")
@@ -141,7 +157,7 @@ function GameStateManager:update(dt)
     end
 end
 
-function GameStateManager:quit()
+function StateMachine:quit()
     if self.currentState then
         assertFunction(self.currentState, "quit")
         if self.currentState.quit then
@@ -150,7 +166,7 @@ function GameStateManager:quit()
     end
 end
 
-function GameStateManager:draw()
+function StateMachine:draw()
     if self.currentState then
         assertFunction(self.currentState, "draw")
         if self.currentState.draw then
@@ -159,7 +175,7 @@ function GameStateManager:draw()
     end
 end
 
-function GameStateManager:resize(w, h)
+function StateMachine:resize(w, h)
     assert(type(w) == "number", "w must be a number")
     assert(type(h) == "number", "h must be a number")
     if self.currentState then
@@ -170,5 +186,5 @@ function GameStateManager:resize(w, h)
     end
 end
 
-return GameStateManager
+return StateMachine
 
