@@ -1,5 +1,5 @@
 --! file: enemy.lua
-local Object = require("game.lib.ext.classic")
+local Object = require("game.lib.classic")
 local Bullet = require("game.src.bullet")
 
 local Enemy = Object:extend()
@@ -8,7 +8,7 @@ local Music = require("music")
 Music:load()
 
 function Enemy:new()
-    self.image = love.graphics.newImage("game/assets/hero-viper.png")
+    self.image = love.graphics.newImage("static/img/hero-viper.png")
     self.x = 325
     self.y = 450
     self.speed = 100
@@ -39,13 +39,13 @@ end
 
 function Enemy:keyPressed(key)
     if key == "space" then
-        table.insert(SnakeBullets, Bullet(self.x, self.y, -0.5, "game/assets/poison.png"))
+        table.insert(SnakeBullets, Bullet(self.x, self.y, -0.5, 700, "static/img/poison.png"))
         Music.enemyAttackSound:stop()
         Music.enemyAttackSound:play()
     end
 end
 
-function Enemy:playImpactSound()
+function Enemy:damageSound()
     Music.playerAttackSound:stop()
     Music.playerImpactSound1:stop()
     Music.playerImpactSound2:stop()

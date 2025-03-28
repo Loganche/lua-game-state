@@ -44,8 +44,8 @@ function Game:update(dt)
 
     for i, v in ipairs(self.snakeBullets) do
         v:update(dt)
-        if v:checkCollision(self.enemy) then
-            v:collisionSideEffects(self.enemy, healthDelta, speedDelta)
+        if v:checkCollision(self.player) then
+            v:collisionSideEffects(self.player, healthDelta, speedDelta)
         end
 
         if v.dead then

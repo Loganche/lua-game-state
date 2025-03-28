@@ -3,7 +3,7 @@ local StateMachineConf = require("stateMachine.stateMachineConf")
 local Background = require("background.background")
 
 function love.load()
-    love.graphics.setNewFont("static/IBMPlexSans-Regular.ttf", 20)
+    love.graphics.setNewFont("static/font/IBMPlexSans-Regular.ttf", 20)
 
     Background:load()
 
