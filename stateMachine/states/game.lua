@@ -29,9 +29,13 @@ function Game:update(dt)
         StateMachine:nextState()
     end
 
+    healthDelta = 20
+    speedDelta = 50
     for i, v in ipairs(self.playerBullets) do
         v:update(dt)
-        v:checkCollision(self.enemy)
+        if v:checkCollision(self.enemy) then
+            v:collisionSideEffects(self.enemy, healthDelta, speedDelta)
+        end
 
         if v.dead then
             table.remove(self.playerBullets, i)
@@ -40,7 +44,9 @@ function Game:update(dt)
 
     for i, v in ipairs(self.snakeBullets) do
         v:update(dt)
-        v:checkCollision(self.player)
+        if v:checkCollision(self.enemy) then
+            v:collisionSideEffects(self.enemy, healthDelta, speedDelta)
+        end
 
         if v.dead then
             table.remove(self.snakeBullets, i)
