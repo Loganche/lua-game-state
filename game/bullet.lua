@@ -1,5 +1,5 @@
 --! file: bullet.lua
-local Object = require("game.lib.classic")
+local Object = require("lib.classic")
 
 local Bullet = Object:extend()
 

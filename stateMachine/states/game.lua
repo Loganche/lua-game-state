@@ -2,8 +2,8 @@ local StateMachine = require("stateMachine.stateMachineInterface")
 
 local Game = {}
 
-local Player = require("game.src.player")
-local Enemy = require("game.src.enemy")
+local Player = require("game.player")
+local Enemy = require("game.enemy")
 
 PlayerBullets = {}
 SnakeBullets = {}
