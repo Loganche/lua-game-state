@@ -12,7 +12,6 @@ function MainMenu:enter()
 end
 
 function MainMenu:update(dt)
-
 end
 
 function MainMenu:draw()
@@ -32,9 +31,9 @@ function MainMenu:keypressed(key, scancode, isrepeat)
     end
 
     if key == "up" then
-        selected = math.min(1, selected - 1)
+        selected = math.max(1, selected - 1)
     elseif key == "down" then
-        selected = math.max(#items, selected + 1)
+        selected = math.min(#items, selected + 1)
     end
 end
 

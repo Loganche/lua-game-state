@@ -16,7 +16,6 @@ function Entity:new(x, y, speed, health, img, bulletDirection, bulletSpeed, bull
     self.bulletDirection = bulletDirection
     self.bulletSpeed = bulletSpeed
     self.bulletImg = bulletImg
-    print("Got: " .. self.bulletImg)
 end
 
 function Entity:update(dt)

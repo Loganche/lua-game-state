@@ -18,7 +18,6 @@ function GameResult:enter()
 end
 
 function GameResult:update(dt)
-
 end
 
 function GameResult:draw()

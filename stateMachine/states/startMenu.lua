@@ -9,7 +9,6 @@ function StartMenu:enter()
 end
 
 function StartMenu:update(dt)
-
 end
 
 function StartMenu:draw()
@@ -29,10 +28,13 @@ function StartMenu:keypressed(key, scancode, isrepeat)
     end
 
     if key == "up" then
-        selected = math.min(1, selected - 1)
+        selected = math.max(1, selected - 1)
     elseif key == "down" then
-        selected = math.max(#items, selected + 1)
+        selected = math.min(#items, selected + 1)
     end
+end
+
+function StartMenu:quit()
 end
 
 function StartMenu:__tostring()

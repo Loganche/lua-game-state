@@ -65,6 +65,7 @@ function StateMachine:nextState()
         -- elseif nextState == "revert" then
         --     GameStateManager:setState(mainMenu)
         else
+            self:quit()
             self:setState(nextState)
         end
     end

@@ -1,17 +1,11 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
 
+local GameConf = require("game.gameConf")
 local Game = {}
 
-local Player = require("game.playerEntity")
-local Enemy = require("game.enemyEntity")
-
 function Game:enter()
-    self.player = Player(300, 20, 500, 100,
-        love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),
-        1, 700, "static/img/hook.png")
-    self.enemy = Enemy(325, 400, 100, 100,
-        love.graphics.newImage("static/img/hero-viper.png"),
-        -1, 350, "static/img/poison.png")
+    self.player = GameConf.player
+    self.enemy = GameConf.enemy
 end
 
 function Game:update(dt)
