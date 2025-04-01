@@ -33,6 +33,7 @@ function StateMachine:setState(newState)
     if self.currentState then
         assertFunction(self.currentState, "enter")
         if self.currentState.enter then
+            print("Entering " .. self.currentState.__tostring())
             self.currentState:enter()
         end
     end
@@ -42,6 +43,7 @@ function StateMachine:reloadState()
     if self.currentState then
         assertFunction(self.currentState, "enter")
         if self.currentState.enter then
+            print("Entering " .. self.currentState.__tostring())
             self.currentState:enter()
         end
     end
@@ -161,6 +163,7 @@ function StateMachine:quit()
     if self.currentState then
         assertFunction(self.currentState, "quit")
         if self.currentState.quit then
+            print("Quitting " .. self.currentState.__tostring())
             self.currentState:quit()
         end
     end

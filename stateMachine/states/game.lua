@@ -10,7 +10,6 @@ SnakeBullets = {}
 
 
 function Game:enter()
-    print("Entered Game")
     self.player = Player()
     self.enemy = Enemy()
     self.playerBullets = PlayerBullets
@@ -78,7 +77,6 @@ function Game:keypressed(key, scancode, isrepeat)
 end
 
 function Game:quit()
-    print("Exited Game")
 end
 
 function Game:__tostring()

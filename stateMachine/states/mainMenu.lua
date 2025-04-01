@@ -6,8 +6,6 @@ local items = {"Start", "Quit"}
 local selected = 1
 
 function MainMenu:enter()
-    print("Entered MainMenu")
-
     local Music = require("music")
     Music:load()
     Music.initSound:play()
@@ -41,7 +39,6 @@ function MainMenu:keypressed(key, scancode, isrepeat)
 end
 
 function MainMenu:quit()
-    print("Exited MainMenu")
 end
 
 function MainMenu:__tostring()

@@ -6,7 +6,6 @@ local items = { "Play", "Back" }
 local selected = 1
 
 function StartMenu:enter()
-    print("Entered StartMenu")
 end
 
 function StartMenu:update(dt)

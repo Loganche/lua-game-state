@@ -10,7 +10,6 @@ Result = {
 }
 
 function GameResult:enter()
-    print("Entered GameResult")
     self.result = Result
 
     local Music = require("music")
@@ -40,7 +39,6 @@ function GameResult:keypressed(key, scancode, isrepeat)
 end
 
 function GameResult:quit()
-    print("Exited GameResult")
 end
 
 function GameResult:__tostring()
