@@ -1,13 +1,10 @@
---! file: player.lua
+--! file: entity.lua
 local Object = require("lib.classic")
 local Bullet = require("game.bullet")
 
 local Entity = Object:extend()
 
-local Music = require("music")
-Music:load()
-
-function Entity:new(x, y, speed, health, img, bulletImg)
+function Entity:new(x, y, speed, health, img, bulletDirection, bulletSpeed, bulletImg)
     self.x = x
     self.y = y
     self.speed = speed
@@ -16,17 +13,14 @@ function Entity:new(x, y, speed, health, img, bulletImg)
     self.width = self.image:getWidth()
     self.height = self.image:getHeight()
     self.bullets = {}
+    self.bulletDirection = bulletDirection
+    self.bulletSpeed = bulletSpeed
     self.bulletImg = bulletImg
+    print("Got: " .. self.bulletImg)
 end
 
-function Entity:update(dt, direction)
-    if direction == -1 then
-        -- left
-        self.x = -self:move(dt)
-    else
-        -- right
-        self.x = self:move(dt)
-    end
+function Entity:update(dt)
+    self.x = self.x + self:move(dt)
 
     self:collision()
 end
@@ -37,11 +31,12 @@ function Entity:draw()
 end
 
 function Entity:keyPressed(key)
-    self:shoot(key, 1)
+    self:shoot(key)
 end
 
 function Entity:move(dt)
     -- movement
+    return self.speed * dt
 end
 
 function Entity:collision()
@@ -49,15 +44,16 @@ function Entity:collision()
     local window_width = love.graphics.getWidth()
     if self.x < 0 then
         self.x = 0
-        self:collisionSideEffects()
+        self:windowCollisionSideEffects()
     elseif self.x + self.width > window_width then
         self.x = window_width - self.width
-        self:collisionSideEffects()
+        self:windowCollisionSideEffects()
     end
 end
 
-function Entity:collisionSideEffects()
+function Entity:windowCollisionSideEffects()
     -- side effects of entity for window collision
+    -- for example: change speed vector for npc to move the opposite direction
 end
 
 function Entity:drawHealthBar()
@@ -72,10 +68,10 @@ function Entity:drawEntityIcon()
     love.graphics.draw(self.image, self.x, self.y)
 end
 
-function Entity:shoot(key, direction)
+function Entity:shoot(key)
     if key == "space" then
         -- place bullet and play sound
-        table.insert(self.bullets, Bullet(self.x, self.y, direction, self.bulletImg))
+        table.insert(self.bullets, Bullet(self.x, self.y, self.bulletDirection, self.bulletSpeed, self.bulletImg))
         self:attackSound()
     end
 end

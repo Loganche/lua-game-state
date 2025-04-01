@@ -2,18 +2,21 @@ local StateMachine = require("stateMachine.stateMachineInterface")
 
 local Game = {}
 
-local Player = require("game.player")
-local Enemy = require("game.enemy")
+local Player = require("game.playerEntity")
+local Enemy = require("game.enemyEntity")
+local Bullet = require("game.bullet")
 
 PlayerBullets = {}
 SnakeBullets = {}
 
 
 function Game:enter()
-    self.player = Player()
-    self.enemy = Enemy()
-    self.playerBullets = PlayerBullets
-    self.snakeBullets = SnakeBullets
+    self.player = Player(300, 20, 500, 100,
+        love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),
+        1, 700, "static/img/hook.png")
+    self.enemy = Enemy(325, 400, 100, 100,
+        love.graphics.newImage("static/img/hero-viper.png"),
+        -1, 350, "static/img/poison.png")
 end
 
 function Game:update(dt)
@@ -23,32 +26,32 @@ function Game:update(dt)
     if self.player.health <= 0 or self.enemy.health <= 0 then
         Result['player'] = self.player.health
         Result['enemy'] = self.enemy.health
-        for i, _ in pairs(self.playerBullets) do self.playerBullets[i] = nil end
-        for i, _ in pairs(self.snakeBullets) do self.snakeBullets[i] = nil end
+        for i, _ in pairs(self.player.bullets) do self.player.bullets[i] = nil end
+        for i, _ in pairs(self.enemy.bullets) do self.enemy.bullets[i] = nil end
         StateMachine:nextState()
     end
 
     healthDelta = 20
     speedDelta = 50
-    for i, v in ipairs(self.playerBullets) do
+    for i, v in ipairs(self.player.bullets) do
         v:update(dt)
         if v:checkCollision(self.enemy) then
             v:collisionSideEffects(self.enemy, healthDelta, speedDelta)
         end
 
         if v.dead then
-            table.remove(self.playerBullets, i)
+            table.remove(self.player.bullets, i)
         end
     end
 
-    for i, v in ipairs(self.snakeBullets) do
+    for i, v in ipairs(self.enemy.bullets) do
         v:update(dt)
         if v:checkCollision(self.player) then
             v:collisionSideEffects(self.player, healthDelta, speedDelta)
         end
 
         if v.dead then
-            table.remove(self.snakeBullets, i)
+            table.remove(self.enemy.bullets, i)
         end
     end
 end
@@ -57,11 +60,11 @@ function Game:draw()
     self.player:draw()
     self.enemy:draw()
 
-    for i, v in ipairs(self.playerBullets) do
+    for i, v in ipairs(self.player.bullets) do
         v:draw()
     end
 
-    for i, v in ipairs(self.snakeBullets) do
+    for i, v in ipairs(self.enemy.bullets) do
         v:draw()
     end
 end
