@@ -1,0 +1,13 @@
+Bullet -> Entity: includes
+
+Entity -> Player: inherits from
+Entity -> Enemy: inherits from
+
+GameConf <-> Player
+GameConf <-> Enemy
+
+HeroConf -> GameConf: static files and params
+
+GameConf -> Game
+
+# looks better with elk

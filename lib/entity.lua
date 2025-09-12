@@ -4,6 +4,8 @@ local Bullet = require("game.bullet")
 
 local Entity = Object:extend()
 
+-- Entity реализует логику, HeroConf передает параметры для сущности
+
 function Entity:new(x, y, speed, health, img, bulletDirection, bulletSpeed, bulletImg)
     self.x = x
     self.y = y

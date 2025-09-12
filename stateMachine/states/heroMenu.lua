@@ -3,6 +3,8 @@ local StateMachine = require("stateMachine.stateMachineInterface")
 local GameConf = require("game.gameConf")
 local Player = require("game.playerEntity")
 local Enemy = require("game.enemyEntity")
+local Music = require("music")
+Music:load()
 
 local HeroMenu = {}
 
@@ -42,17 +44,17 @@ function HeroMenu:quit()
     if items[selected] == "Pudge" then
         GameConf:setPlayer(Player(300, 20, 500, 100,
             love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),
-            1, 700, "static/img/hook.png"))
+            1, 700, love.graphics.newImage("static/img/hook.png", { dpiscale = 5 })))
         GameConf:setEnemy(Enemy(325, 400, 100, 100,
             love.graphics.newImage("static/img/hero-viper.png"),
-            -1, 350, "static/img/poison.png"))
+            -1, 350, love.graphics.newImage("static/img/poison.png", { dpiscale = 5 })))
     elseif items[selected] == "Viper" then
         GameConf:setPlayer(Player(300, 20, 500, 100,
             love.graphics.newImage("static/img/hero-viper.png"),
-            1, 700, "static/img/poison.png"))
+            1, 700, love.graphics.newImage("static/img/poison.png", { dpiscale = 5 })))
         GameConf:setEnemy(Enemy(325, 400, 100, 100,
             love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),
-            -1, 350, "static/img/hook.png"))
+            -1, 350, love.graphics.newImage("static/img/hook.png", { dpiscale = 5 })))
     end
 end
 

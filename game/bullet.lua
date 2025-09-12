@@ -3,8 +3,10 @@ local Object = require("lib.classic")
 
 local Bullet = Object:extend()
 
+-- TODO Положить рядом с Entity
+
 function Bullet:new(x, y, direction, speed, img)
-    self.image = love.graphics.newImage(img, {dpiscale = 5})
+    self.image = img
     self.x = x
     self.y = y
     self.speed = direction * speed

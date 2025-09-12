@@ -48,6 +48,7 @@ function Game:__tostring()
     return 'Game', 'Next'
 end
 
+-- TODO Вытащить игровую логику из стейтов
 function Game:bulletShot(dt, bullets, entity, healthDelta, speedDelta)
     for i, v in ipairs(bullets) do
         v:update(dt)

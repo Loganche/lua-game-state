@@ -1,0 +1,14 @@
+MainMenu -> HeroMenu: start
+
+HeroMenu -> StartMenu: chose hero
+HeroMenu -> MainMenu: back
+
+StartMenu -> Game: play
+StartMenu -> HeroMenu: back
+
+Game -> GameResult: auto
+
+GameResult -> MainMenu: auto
+MainMenu -> Quit: quit
+
+# looks better with dagre

@@ -6,6 +6,8 @@ local Enemy = Entity:extend()
 local Music = require("music")
 Music:load()
 
+-- TODO убрать звуковые эффекты, они будут зашиты в heroConf.lua
+
 function Enemy:windowCollisionSideEffects()
     -- side effects of entity for window collision
     self.speed = -self.speed
