@@ -2,6 +2,10 @@ local StateMachine = require("stateMachine.stateMachineInterface")
 local StateMachineConf = require("stateMachine.stateMachineConf")
 local Background = require("background.background")
 local HeroConfigModule = require("game.heroConfigManager")
+local Music = require("music")
+
+local music = Music.getInstance()
+music:loadGameMusic()
 
 function love.load()
     love.graphics.setNewFont("static/font/IBMPlexSans-Regular.ttf", 20)

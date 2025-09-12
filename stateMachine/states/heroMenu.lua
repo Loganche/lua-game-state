@@ -5,13 +5,13 @@ local HeroConfigModule = require("game.heroConfigManager")
 local Player = require("game.playerEntity")
 local Enemy = require("game.enemyEntity")
 local Music = require("music")
-Music:load()
 
 local HeroMenu = {}
 
 -- Dynamically generate hero list from configs
 local heroConfigManager = HeroConfigModule.getInstance()
 local gameConf = GameConf.getInstance()
+local music = Music.getInstance()
 local items = {}
 local selected = 1
 
@@ -59,6 +59,9 @@ function HeroMenu:quit()
         local heroConfig = heroConfigManager:getHeroConfig(selectedHero)
         -- exclude "Back" element
         local enemyConfig = heroConfigManager:getHeroConfig(items[math.random(#items-1)])
+
+        music:loadPlayerMusic(heroConfig.attackSound, heroConfig.impactSound)
+        music:loadEnemyMusic(enemyConfig.attackSound, enemyConfig.impactSound)
 
         gameConf:setPlayer(Player(
             300, 20,

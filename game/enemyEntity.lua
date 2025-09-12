@@ -1,10 +1,10 @@
 --! file: Enemy.lua
 local Entity = require("lib.entity")
+local Music = require("music")
+local music = Music.getInstance()
 
 local Enemy = Entity:extend()
 
-local Music = require("music")
-Music:load()
 
 function Enemy:windowCollisionSideEffects()
     -- side effects of entity for window collision
@@ -14,16 +14,16 @@ end
 function Enemy:attackSound()
     -- stop attack sound
     -- play attack sound
-    Music.enemyAttackSound:stop()
-    Music.enemyAttackSound:play()
+    music.enemyAttackSound:stop()
+    music.enemyAttackSound:play()
 end
 
 function Enemy:damageSound()
     -- stop attack & impact sounds
     -- play impact sound
-    Music.playerAttackSound:stop()
-    Music.playerImpactSound:stop()
-    Music.playerImpactSound:play()
+    music.playerAttackSound:stop()
+    music.playerImpactSound:stop()
+    music.playerImpactSound:play()
 end
 
 return Enemy

@@ -31,6 +31,8 @@ function HeroConfig:new(configData)
     self.attackSound = love.audio.newSource(configData.attackSound, "static")
     self.impactSound = love.audio.newSource(configData.impactSound, "static")
 
+    
+
     return self
 end
 

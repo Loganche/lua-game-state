@@ -1,4 +1,7 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
+local Music = require("music")
+
+local music = Music.getInstance()
 
 local MainMenu = {}
 
@@ -6,9 +9,7 @@ local items = {"Start", "Quit"}
 local selected = 1
 
 function MainMenu:enter()
-    local Music = require("music")
-    Music:load()
-    Music.initSound:play()
+    music.initSound:play()
 end
 
 function MainMenu:update(dt)

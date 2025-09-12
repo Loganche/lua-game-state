@@ -1,10 +1,10 @@
 --! file: player.lua
 local Entity = require("lib.entity")
+local Music = require("music")
+local music = Music.getInstance()
 
 local Player = Entity:extend()
 
-local Music = require("music")
-Music:load()
 
 function Player:update(dt)
     if love.keyboard.isDown("left") then
@@ -30,16 +30,16 @@ end
 function Player:attackSound()
     -- stop attack sound
     -- play attack sound
-    Music.playerAttackSound:stop()
-    Music.playerAttackSound:play()
+    music.playerAttackSound:stop()
+    music.playerAttackSound:play()
 end
 
 function Player:damageSound()
     -- stop attack & impact sounds
     -- play impact sound
-    Music.enemyAttackSound:stop()
-    Music.enemyImpactSound:stop()
-    Music.enemyImpactSound:play()
+    music.enemyAttackSound:stop()
+    music.enemyImpactSound:stop()
+    music.enemyImpactSound:play()
 end
 
 return Player

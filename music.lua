@@ -1,30 +1,58 @@
-local Music = {
-    initSound = nil,
-    endSound = nil,
-    enemyAttackSound = nil,
-    enemyImpactSound = nil,
-    playerAttackSound = nil,
-    playerImpactSound = nil,
-    --for heroconf
-    viperAttackSound = nil,
-    viperImpactSound = nil,
-    pudgeAttackSound = nil,
-    pudgeImpactSound = nil,
-}
+--! file: music.lua
 
--- TODO сейчас звуки захардкожены для игрока и противника, в конфигах надо сделать их универсальными
-function Music:load()
-    self.initSound = love.audio.newSource("static/sound/Game_start.mp3", "static")
-    self.endSound = love.audio.newSource("static/sound/Game_end.mp3", "static")
-    self.enemyAttackSound = love.audio.newSource("static/sound/Viper_attack.mp3", "static")
-    self.enemyImpactSound = love.audio.newSource("static/sound/Viper_impact.mp3", "static")
-    self.playerAttackSound = love.audio.newSource("static/sound/Pudge_attack.mp3", "static")
-    self.playerImpactSound = love.audio.newSource("static/sound/Pudge_impact1.mp3", "static")
-    -- TODO somehow separate this logic from heroconfig paths and make it dynamicly initializable
-    self.viperAttackSound = love.audio.newSource("static/sound/Viper_attack.mp3", "static")
-    self.viperImpactSound = love.audio.newSource("static/sound/Viper_impact.mp3", "static")
-    self.pudgeAttackSound = love.audio.newSource("static/sound/Pudge_attack.mp3", "static")
-    self.pudgeImpactSound = love.audio.newSource("static/sound/Pudge_impact1.mp3", "static")
+local Music = {}
+Music.__index = Music
+
+function Music:new()
+    local self = setmetatable({}, Music)
+    self.initSound = nil
+    self.endSound = nil
+    self.enemyAttackSound = nil
+    self.enemyImpactSound = nil
+    self.playerAttackSound = nil
+    self.playerImpactSound = nil
+    return self
 end
 
-return Music
+-- TODO сейчас звуки захардкожены для игрока и противника, в конфигах надо сделать их универсальными
+function Music:loadGameMusic()
+    self.initSound = love.audio.newSource("static/sound/Game_start.mp3", "static")
+    self.endSound = love.audio.newSource("static/sound/Game_end.mp3", "static")
+end
+
+function Music:loadPlayerMusic(attackSound, impactSound)
+    if attackSound then
+        self.playerAttackSound = attackSound
+    else
+        print("Warning: No player attack sound provided")
+    end
+
+    if impactSound then
+        self.playerImpactSound = impactSound
+    else
+        print("Warning: No player impact sound provided")
+    end
+end
+
+function Music:loadEnemyMusic(attackSound, impactSound)
+    if attackSound then
+        self.enemyAttackSound = attackSound
+    end
+    if impactSound then
+        self.enemyImpactSound = impactSound
+    end
+end
+
+local instance = nil
+
+function Music.getInstance()
+    if not instance then
+        instance = Music:new()
+    end
+    return instance
+end
+
+return {
+    Music = Music,
+    getInstance = Music.getInstance
+}

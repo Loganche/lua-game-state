@@ -1,4 +1,7 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
+local Music = require("music")
+
+local music = Music.getInstance()
 
 local GameResult = {
     result = {},
@@ -12,9 +15,7 @@ Result = {
 function GameResult:enter()
     self.result = Result
 
-    local Music = require("music")
-    Music:load()
-    Music.endSound:play()
+    music.endSound:play()
 end
 
 function GameResult:update(dt)
