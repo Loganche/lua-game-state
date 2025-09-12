@@ -6,8 +6,6 @@ local Player = Entity:extend()
 local Music = require("music")
 Music:load()
 
--- TODO убрать звуковые эффекты, они будут зашиты в heroConf.lua
-
 function Player:update(dt)
     if love.keyboard.isDown("left") then
         self.x = self.x - self:move(dt)

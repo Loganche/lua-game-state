@@ -5,7 +5,7 @@ local GameConf = {}
 function GameConf:new()
     self.player = {}
     self.enemy = {}
-    -- aray of 2 elements - player and enemy
+    -- aray of all heroes from json configs
     self.heroConf = {}
 end
 

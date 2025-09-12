@@ -8,14 +8,10 @@ function HeroConfig:new(configData)
 
     -- Validate configData structure (optional, for safety)
     assert(configData.name and type(configData.name) == "string", "name is required and must be a string")
-    assert(configData.x and type(configData.x) == "number", "x is required and must be a number")
-    assert(configData.y and type(configData.y) == "number", "y is required and must be a number")
     assert(configData.speed and type(configData.speed) == "number", "speed is required and must be a number")
     assert(configData.health and type(configData.health) == "number", "health is required and must be a number")
     assert(configData.img and type(configData.img) == "string", "img is required and must be a string path")
     assert(configData.imgScale and type(configData.imgScale) == "number", "imgScale is required and must be a number")
-    assert(configData.bulletDirection and type(configData.bulletDirection) == "number",
-        "bulletDirection is required and must be a number")
     assert(configData.bulletSpeed and type(configData.bulletSpeed) == "number",
         "bulletSpeed is required and must be a number")
     assert(configData.bulletImg and type(configData.bulletImg) == "string", "bulletImg is required and must be a string path")
@@ -27,12 +23,9 @@ function HeroConfig:new(configData)
         "impactSound is required and must be a string")
 
     self.name = configData.name
-    self.x = configData.x
-    self.y = configData.y
     self.speed = configData.speed
     self.health = configData.health
     self.img = love.graphics.newImage(configData.img, { dpiscale = configData.imgScale })
-    self.bulletDirection = configData.bulletDirection
     self.bulletSpeed = configData.bulletSpeed
     self.bulletImg = love.graphics.newImage(configData.bulletImg, { dpiscale = configData.bulletImgScale })
     self.attackSound = love.audio.newSource(configData.attackSound, "static")

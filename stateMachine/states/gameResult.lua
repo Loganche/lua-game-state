@@ -26,7 +26,7 @@ function GameResult:draw()
     else
         love.graphics.print("Enemy wins!", 350, 250)
     end
-    love.graphics.print("Player - " .. Result['player'] .. "\nEnemy - " .. Result['enemy'], 350, 280)
+    love.graphics.print("Player health - " .. Result['player'] .. "\nEnemy health - " .. Result['enemy'], 350, 280)
 end
 
 function GameResult:keypressed(key, scancode, isrepeat)

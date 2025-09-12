@@ -8,6 +8,7 @@ Music:load()
 
 local HeroMenu = {}
 
+-- make dynamic list from heroConfig
 local items = { "Pudge", "Viper", "Back" }
 local selected = 1
 
@@ -41,6 +42,9 @@ function HeroMenu:keypressed(key, scancode, isrepeat)
 end
 
 function HeroMenu:quit()
+    -- for player x=300 y=20 direction=1
+    -- for enemy x=325 y=400 direction=-1
+    -- change to initializing from heroConfig list items
     if items[selected] == "Pudge" then
         GameConf:setPlayer(Player(300, 20, 500, 100,
             love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),

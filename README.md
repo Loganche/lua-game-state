@@ -55,4 +55,4 @@ To run this project, you need to have the LÖVE 2D framework installed on your s
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the License. See the [LICENSE](LICENSE) file for details.
