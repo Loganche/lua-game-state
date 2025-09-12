@@ -4,8 +4,9 @@ local GameConf = require("game.gameConf")
 local Game = {}
 
 function Game:enter()
-    self.player = GameConf.player
-    self.enemy = GameConf.enemy
+    local gameConf = GameConf.getInstance()
+    self.player = gameConf.player
+    self.enemy = gameConf.enemy
 end
 
 function Game:update(dt)

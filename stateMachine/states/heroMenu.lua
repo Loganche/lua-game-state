@@ -1,6 +1,7 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
 
 local GameConf = require("game.gameConf")
+local HeroConfigModule = require("game.heroConfigManager")
 local Player = require("game.playerEntity")
 local Enemy = require("game.enemyEntity")
 local Music = require("music")
@@ -8,11 +9,19 @@ Music:load()
 
 local HeroMenu = {}
 
--- make dynamic list from heroConfig
-local items = { "Pudge", "Viper", "Back" }
+-- Dynamically generate hero list from configs
+local heroConfigManager = HeroConfigModule.getInstance()
+local gameConf = GameConf.getInstance()
+local items = {}
 local selected = 1
 
 function HeroMenu:enter()
+    -- Populate items with hero names from configs
+    items = {}
+    for name, _ in pairs(heroConfigManager:getHeroConfigs()) do
+        table.insert(items, name)
+    end
+    table.insert(items, "Back")
 end
 
 function HeroMenu:update(dt)
@@ -44,21 +53,32 @@ end
 function HeroMenu:quit()
     -- for player x=300 y=20 direction=1
     -- for enemy x=325 y=400 direction=-1
-    -- change to initializing from heroConfig list items
-    if items[selected] == "Pudge" then
-        GameConf:setPlayer(Player(300, 20, 500, 100,
-            love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),
-            1, 700, love.graphics.newImage("static/img/hook.png", { dpiscale = 5 })))
-        GameConf:setEnemy(Enemy(325, 400, 100, 100,
-            love.graphics.newImage("static/img/hero-viper.png"),
-            -1, 350, love.graphics.newImage("static/img/poison.png", { dpiscale = 5 })))
-    elseif items[selected] == "Viper" then
-        GameConf:setPlayer(Player(300, 20, 500, 100,
-            love.graphics.newImage("static/img/hero-viper.png"),
-            1, 700, love.graphics.newImage("static/img/poison.png", { dpiscale = 5 })))
-        GameConf:setEnemy(Enemy(325, 400, 100, 100,
-            love.graphics.newImage("static/img/hero-pudge.png", { dpiscale = 3 }),
-            -1, 350, love.graphics.newImage("static/img/hook.png", { dpiscale = 5 })))
+
+    local selectedHero = items[selected]
+    if selectedHero ~= "Back" then
+        local heroConfig = heroConfigManager:getHeroConfig(selectedHero)
+        -- exclude "Back" element
+        local enemyConfig = heroConfigManager:getHeroConfig(items[math.random(#items-1)])
+
+        gameConf:setPlayer(Player(
+            300, 20,
+            heroConfig.speed,
+            heroConfig.health,
+            heroConfig.img,
+            1,
+            heroConfig.bulletSpeed,
+            heroConfig.bulletImg
+        ))
+
+        gameConf:setEnemy(Enemy(
+            325, 400,
+            enemyConfig.speed,
+            enemyConfig.health,
+            enemyConfig.img,
+            -1,
+            enemyConfig.bulletSpeed,
+            enemyConfig.bulletImg
+        ))
     end
 end
 

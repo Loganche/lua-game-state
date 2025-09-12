@@ -46,6 +46,10 @@ function Bullet:collisionSideEffects(obj, healthDelta, speedDelta)
     self.dead = true
 
     obj.health = obj.health - healthDelta
+    -- health can't be negative
+    if obj.health < 0 then
+        obj.health = 0
+    end
     obj.damageSound()
 
     --Increase enemy speed

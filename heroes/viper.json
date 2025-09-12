@@ -1,10 +1,10 @@
 {
     "name": "Viper",
-    "speed": 100,
+    "speed": 500,
     "health": 100,
     "img": "static/img/hero-viper.png",
     "imgScale": 1,
-    "bulletSpeed": 350,
+    "bulletSpeed": 700,
     "bulletImg": "static/img/poison.png",
     "bulletImgScale": 5,
     "attackSound": "static/sound/Viper_attack.mp3",

@@ -1,12 +1,13 @@
 --! file: gameConf.lua
 
 local GameConf = {}
+GameConf.__index = GameConf
 
 function GameConf:new()
+    local self = setmetatable({}, GameConf)
     self.player = {}
     self.enemy = {}
-    -- aray of all heroes from json configs
-    self.heroConf = {}
+    return self
 end
 
 function GameConf:setPlayer(player)
@@ -17,16 +18,24 @@ function GameConf:setEnemy(enemy)
     self.enemy = enemy
 end
 
-function GameConf:addHeroConf(heroConf)
-    table.insert(self.heroConf, heroConf)
+function GameConf:getPlayer()
+    return self.player
 end
 
-function GameConf:getPlayerHeroConf()
-    return self.heroConf[0]
+function GameConf:getEnemy()
+    return self.enemy
 end
 
-function GameConf:getEnemyHeroConf()
-    return self.heroConf[1]
+local instance = nil
+
+function GameConf.getInstance()
+    if not instance then
+        instance = GameConf:new()
+    end
+    return instance
 end
 
-return GameConf
+return {
+    GameConf = GameConf,
+    getInstance = GameConf.getInstance
+}

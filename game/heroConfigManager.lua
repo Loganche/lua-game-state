@@ -6,7 +6,6 @@ local HeroConfig = require("game.heroConfig")
 local HeroConfigManager = {}
 HeroConfigManager.__index = HeroConfigManager
 
--- TODO add getHeroConfigNames method for HeroMenu list
 function HeroConfigManager:new()
     local self = setmetatable({}, HeroConfigManager)
     self.heroConfigs = {}

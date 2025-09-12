@@ -1,10 +1,10 @@
 {
     "name": "Pudge",
-    "speed": 500,
-    "health": 100,
+    "speed": 300,
+    "health": 150,
     "img": "static/img/hero-pudge.png",
     "imgScale": 3,
-    "bulletSpeed": 700,
+    "bulletSpeed": 500,
     "bulletImg": "static/img/hook.png",
     "bulletImgScale": 5,
     "attackSound": "static/sound/Pudge_attack.mp3",
