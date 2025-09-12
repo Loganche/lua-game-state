@@ -1,19 +1,14 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
-local StateMachineConf = require("stateMachine.stateMachineConf")
 local Background = require("background.background")
-local HeroConfigModule = require("game.heroConfigManager")
+local StateMachineConf = require("stateMachine.stateMachineConf")
 local Music = require("music")
 
 local music = Music.getInstance()
 music:loadGameMusic()
 
 function love.load()
+    -- Set default font
     love.graphics.setNewFont("static/font/IBMPlexSans-Regular.ttf", 20)
-
-    -- Get the single instance of HeroConfigManager
-    local heroConfigManager = HeroConfigModule.getInstance()
-    -- Load configs from a directory containing JSON files
-    heroConfigManager:loadConfigsFromDirectory("heroes")
 
     Background:load()
 

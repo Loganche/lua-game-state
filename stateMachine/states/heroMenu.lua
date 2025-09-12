@@ -55,10 +55,11 @@ function HeroMenu:quit()
     -- for enemy x=325 y=400 direction=-1
 
     local selectedHero = items[selected]
+    local selectedEnemy = items[math.random(#items - 1)]
     if selectedHero ~= "Back" then
+        print("Hero is " .. selectedHero .. " and Enemy is " .. selectedEnemy)
         local heroConfig = heroConfigManager:getHeroConfig(selectedHero)
-        -- exclude "Back" element
-        local enemyConfig = heroConfigManager:getHeroConfig(items[math.random(#items-1)])
+        local enemyConfig = heroConfigManager:getHeroConfig(selectedEnemy)
 
         music:loadPlayerMusic(heroConfig.attackSound, heroConfig.impactSound)
         music:loadEnemyMusic(enemyConfig.attackSound, enemyConfig.impactSound)

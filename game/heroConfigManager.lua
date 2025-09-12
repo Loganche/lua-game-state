@@ -14,7 +14,11 @@ end
 
 function HeroConfigManager:addHeroConfig(configData)
     local heroConfig = HeroConfig:new(configData)
+    if self.heroConfigs[heroConfig.name] ~= nil then
+        print("Warning: HeroConfig for current name: " .. heroConfig.name .. " is already added. Rewriting...")
+    end
     self.heroConfigs[heroConfig.name] = heroConfig
+    print("Added config " .. heroConfig.name)
 end
 
 function HeroConfigManager:getHeroConfig(heroName)
@@ -52,6 +56,7 @@ function HeroConfigManager:loadConfigsFromDirectory(directoryPath)
 
     for _, file in ipairs(items) do
         if string.match(file, "%.json$") then
+            print("Found file " .. file)
             self:loadConfigFromFile(directoryPath .. "/" .. file)
         end
     end

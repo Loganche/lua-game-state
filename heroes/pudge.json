@@ -8,5 +8,5 @@
     "bulletImg": "static/img/hook.png",
     "bulletImgScale": 5,
     "attackSound": "static/sound/Pudge_attack.mp3",
-    "impactSound": "static/sound/Pudge_impact1.mp3"
+    "impactSound": "static/sound/Pudge_impact.mp3"
 }
