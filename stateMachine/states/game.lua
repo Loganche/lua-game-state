@@ -1,6 +1,6 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
 
-local GameConf = require("game.gameConf")
+local GameConf = require("game.conf.gameConf")
 local Game = {}
 
 function Game:enter()

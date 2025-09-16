@@ -1,7 +1,7 @@
 --! file: heroconfigmanager.lua
 
 local json = require("lib.dkjson")
-local HeroConfig = require("game.heroConfig")
+local HeroConfig = require("game.conf.heroConfig")
 
 local HeroConfigManager = {}
 HeroConfigManager.__index = HeroConfigManager

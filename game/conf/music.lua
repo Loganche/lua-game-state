@@ -14,7 +14,6 @@ function Music:new()
     return self
 end
 
--- TODO сейчас звуки захардкожены для игрока и противника, в конфигах надо сделать их универсальными
 function Music:loadGameMusic()
     self.initSound = love.audio.newSource("static/sound/Game_start.mp3", "static")
     self.endSound = love.audio.newSource("static/sound/Game_end.mp3", "static")

@@ -1,5 +1,5 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
-local Music = require("music")
+local Music = require("game.conf.music")
 
 local music = Music.getInstance()
 

@@ -1,10 +1,10 @@
 local StateMachine = require("stateMachine.stateMachineInterface")
 
-local GameConf = require("game.gameConf")
-local HeroConfigModule = require("game.heroConfigManager")
+local GameConf = require("game.conf.gameConf")
+local HeroConfigModule = require("game.conf.heroConfigManager")
 local Player = require("game.playerEntity")
 local Enemy = require("game.enemyEntity")
-local Music = require("music")
+local Music = require("game.conf.music")
 
 local HeroMenu = {}
 

@@ -1,6 +1,6 @@
 --! file: entity.lua
 local Object = require("lib.classic")
-local Bullet = require("game.bullet")
+local Bullet = require("game.base.bullet")
 
 local Entity = Object:extend()
 

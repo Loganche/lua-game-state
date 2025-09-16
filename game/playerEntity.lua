@@ -1,6 +1,6 @@
 --! file: player.lua
-local Entity = require("lib.entity")
-local Music = require("music")
+local Entity = require("game.base.entity")
+local Music = require("game.conf.music")
 local music = Music.getInstance()
 
 local Player = Entity:extend()

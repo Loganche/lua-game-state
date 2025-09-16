@@ -4,7 +4,7 @@ local startMenu = require("stateMachine.states.startMenu")
 local game = require("stateMachine.states.game")
 local gameResult = require("stateMachine.states.gameResult")
 local quit = require("stateMachine.states.quit")
-local HeroConfigModule = require("game.heroConfigManager")
+local HeroConfigModule = require("game.conf.heroConfigManager")
 
 local function generateHeroMenuConfig()
     local heroConfigManager = HeroConfigModule.getInstance()
