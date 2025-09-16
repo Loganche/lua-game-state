@@ -5,7 +5,7 @@
     "img": "static/img/hero-matiz.jpg",
     "imgScale": 1,
     "bulletSpeed": 900,
-    "bulletImg": "static/img/wheel.png",
+    "bulletImg": "static/img/bullet-matiz.png",
     "bulletImgScale": 5,
     "attackSound": "static/sound/Matiz_attack.mp3",
     "impactSound": "static/sound/Matiz_impact.mp3"

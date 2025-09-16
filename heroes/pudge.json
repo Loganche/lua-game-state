@@ -5,7 +5,7 @@
     "img": "static/img/hero-pudge.png",
     "imgScale": 3,
     "bulletSpeed": 500,
-    "bulletImg": "static/img/hook.png",
+    "bulletImg": "static/img/bullet-pudge.png",
     "bulletImgScale": 5,
     "attackSound": "static/sound/Pudge_attack.mp3",
     "impactSound": "static/sound/Pudge_impact.mp3"

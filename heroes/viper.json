@@ -5,7 +5,7 @@
     "img": "static/img/hero-viper.png",
     "imgScale": 1,
     "bulletSpeed": 700,
-    "bulletImg": "static/img/poison.png",
+    "bulletImg": "static/img/bullet-viper.png",
     "bulletImgScale": 5,
     "attackSound": "static/sound/Viper_attack.mp3",
     "impactSound": "static/sound/Viper_impact.mp3"
